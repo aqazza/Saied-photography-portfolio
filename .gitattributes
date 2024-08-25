@@ -1,0 +1,4 @@
+src/img/portfolio/video4full.mp4 filter=lfs diff=lfs merge=lfs -text
+src/img/portfolio/video3full.mp4 filter=lfs diff=lfs merge=lfs -text
+src/img/portfolio/video2full.mp4 filter=lfs diff=lfs merge=lfs -text
+src/img/portfolio/video1full.mp4 filter=lfs diff=lfs merge=lfs -text
