@@ -4,15 +4,40 @@
 
 @layer base {
   body {
-    @apply overflow-hidden text-primary font-secondary bg-white;
+    @apply overflow-auto text-primary font-secondary bg-white;
   }
   .h1 {
     @apply text-[54px] lg:text-[108px] font-primary font-bold capitalize leading-[120%] tracking-[-0.05em] mb-2;
   }
   .section {
-    @apply h-screen w-screen;
+    @apply h-auto w-full min-h-screen;
   }
   .btn {
     @apply py-[18px] px-[50px] h-[66px] flex items-center justify-center text-base uppercase font-secondary font-semibold bg-primary text-white;
+  }
+
+  /* Add media queries here for mobile responsiveness */
+  @media (max-width: 768px) {
+    .h1 {
+      @apply text-[36px] leading-[110%];
+    }
+    .section {
+      @apply h-auto w-full min-h-screen;
+    }
+    .btn {
+      @apply py-[12px] px-[30px] h-[50px];
+    }
+  }
+
+  @media (max-width: 480px) {
+    .h1 {
+      @apply text-[24px] leading-[100%];
+    }
+    .section {
+      @apply h-auto w-full min-h-screen;
+    }
+    .btn {
+      @apply py-[10px] px-[20px] h-[40px];
+    }
   }
 }
