@@ -46,7 +46,7 @@ const Socials = () => {
           </a>
         </li>
         <li>
-          <a href='https://www.youtube.com/c/THE2AMPODCAST' target='_blank'>
+          <a href='https://www.youtube.com/saiedash' target='_blank'>
             <ImYoutube />
           </a>
         </li>
