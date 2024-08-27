@@ -37,7 +37,7 @@ const Home = () => {
               photographer <br /> & film maker
             </h1>
             <p className='text-[26px] lg:text-[36px] font-primary mb-4 lg:mb-12'>
-              Los Angeles, CA
+              Orange County, CA
             </p>
             <Link to={'/contact'} className='btn mb-[30px]'>
               lets create
