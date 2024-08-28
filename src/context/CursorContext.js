@@ -30,7 +30,7 @@ const CursorProvider = ({ children }) => {
     } else {
       setCursorBG('none');
     }
-  });
+  }, [mobileViewportIsActive]); // Added mobileViewportIsActive as a dependency
 
   // cursor variants
   const cursorVariants = {
@@ -58,7 +58,7 @@ const CursorProvider = ({ children }) => {
   const mouseEnterHandler = () => {
     setCursorBG('text');
   };
-  // mouse leaver handler
+  // mouse leave handler
   const mouseLeaveHandler = () => {
     setCursorBG('default');
   };

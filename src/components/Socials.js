@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 // import icons
 import {
   ImTwitter,
-  ImPinterest,
   ImInstagram,
   ImYoutube,
   ImLinkedin2,
@@ -20,32 +19,36 @@ const Socials = () => {
       className='hidden xl:flex ml-24'
     >
       <ul className='flex gap-x-4'>
-        <li>
-          <a href='https://x.com/visualcraftsman' target='_blank'>
-            <ImTwitter />
-          </a>
-        </li>
+      <li>
+  <a href='https://x.com/visualcraftsman' target='_blank' rel="noopener noreferrer">
+    <ImTwitter />
+  </a>
+</li>
 
-        <li>
-          <a href='https://www.instagram.com/visualcraftsman/' target='_blank'>
-            <ImInstagram />
-          </a>
-        </li>
-        <li>
-          <a href='https://www.linkedin.com/in/saied-ashour-45767bb1/' target='_blank'>
-          <ImLinkedin2/>
-          </a>
-        </li>
-        <li>
-          <a href='https://www.youtube.com/saiedash' target='_blank'>
-            <ImYoutube />
-          </a>
-        </li>
-        <li>
-          <a href='https://vero.co/visualcraftsman' target='_blank'>
-            <ImVideoCamera />
-          </a>
-        </li>
+<li>
+  <a href='https://www.instagram.com/visualcraftsman/' target='_blank' rel="noopener noreferrer">
+    <ImInstagram />
+  </a>
+</li>
+
+<li>
+  <a href='https://www.linkedin.com/in/saied-ashour-45767bb1/' target='_blank' rel="noopener noreferrer">
+    <ImLinkedin2/>
+  </a>
+</li>
+
+<li>
+  <a href='https://www.youtube.com/saiedash' target='_blank' rel="noopener noreferrer">
+    <ImYoutube />
+  </a>
+</li>
+
+<li>
+  <a href='https://vero.co/visualcraftsman' target='_blank' rel="noopener noreferrer">
+    <ImVideoCamera />
+  </a>
+</li>
+
       </ul>
     </div>
   );
