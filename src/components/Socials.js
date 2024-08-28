@@ -20,21 +20,12 @@ const Socials = () => {
       className='hidden xl:flex ml-24'
     >
       <ul className='flex gap-x-4'>
-        {/* <li>
-          <a href='http://wwww.facebook.com' target='_blank'>
-            <ImFacebook />
-          </a>
-        </li> */}
         <li>
           <a href='https://x.com/visualcraftsman' target='_blank'>
             <ImTwitter />
           </a>
         </li>
-        {/* <li>
-          <a href='https://www.pinterest.com/saiedash/' target='_blank'>
-            <ImPinterest />
-          </a>
-        </li> */}
+
         <li>
           <a href='https://www.instagram.com/visualcraftsman/' target='_blank'>
             <ImInstagram />

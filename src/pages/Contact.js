@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 // import images
 import WomanImg from '../img/contact/woman.png';
 // import motion
@@ -10,6 +10,23 @@ import { CursorContext } from '../context/CursorContext';
 
 const Contact = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    window.location.href = `mailto:ashoursaied@gmail.com?subject=Contact Form Submission&body=Name: ${formData.name}%0AEmail: ${formData.email}%0AMessage: ${formData.message}`;
+  };
 
   return (
     <motion.section
@@ -39,25 +56,34 @@ const Contact = () => {
             <p className='mb-12'>Project, idea, or just connecting,
                I’m always open to a conversation.</p>
             {/* form */}
-            <form className='flex flex-col gap-y-4'>
+            <form className='flex flex-col gap-y-4' onSubmit={handleSubmit}>
               <div className='flex gap-x-10'>
                 <input
                   className='outline-none border-b border-b-primary h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]'
                   type='text'
+                  name='name'
                   placeholder='Your name'
+                  value={formData.name}
+                  onChange={handleChange}
                 />
                 <input
                   className='outline-none border-b border-b-primary h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]'
-                  type='text'
+                  type='email'
+                  name='email'
                   placeholder='Your email address'
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <input
                 className='outline-none border-b border-b-primary h-[60px] bg-transparent font-secondary w-full pl-3 placeholder:text-[#757879]'
                 type='text'
+                name='message'
                 placeholder='Your message'
+                value={formData.message}
+                onChange={handleChange}
               />
-              <button className='btn mb-[30px] mx-auto lg:mx-0 self-start'>
+              <button className='btn mb-[30px] mx-auto lg:mx-0 self-start' type='submit'>
                 Send it
               </button>
             </form>
