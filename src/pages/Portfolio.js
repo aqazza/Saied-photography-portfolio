@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { transition1 } from "../transitions";
@@ -11,7 +11,7 @@ import Video3 from "../img/portfolio/video3.mp4";
 import Video3Full from "../img/portfolio/video3full.mp4";
 import Video4 from "../img/portfolio/video4.mp4";
 import Video4Full from "../img/portfolio/video4full.mp4";
-import port2 from "../img/portfolio/port2.jpg"
+import port2 from "../img/portfolio/port2.jpg";
 
 const PortfolioCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -83,6 +83,8 @@ const PortfolioCarousel = () => {
 const Portfolio = () => {
   const { mouseEnterHandler, mouseLeaveHandler } = useContext(CursorContext);
   const [showCarousel, setShowCarousel] = useState(false);
+  const [showFullscreenVideo, setShowFullscreenVideo] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(null);
 
   const handleOpenCarousel = () => {
     setShowCarousel(true);
@@ -91,6 +93,34 @@ const Portfolio = () => {
   const handleCloseCarousel = () => {
     setShowCarousel(false);
   };
+
+  const handleOpenFullscreenVideo = (video) => {
+    setCurrentVideo(video);
+    setShowFullscreenVideo(true);
+  };
+
+  const handleCloseFullscreenVideo = () => {
+    setShowFullscreenVideo(false);
+    setCurrentVideo(null);
+  };
+
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === "Escape") {
+        handleCloseFullscreenVideo();
+      }
+    };
+
+    if (showFullscreenVideo) {
+      window.addEventListener("keydown", handleEscKey);
+    } else {
+      window.removeEventListener("keydown", handleEscKey);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscKey);
+    };
+  }, [showFullscreenVideo]);
 
   return (
     <motion.section
@@ -140,7 +170,7 @@ const Portfolio = () => {
           >
             <div
               className="max-w-[250px] lg:max-w-[320px] h-[187px] lg:h-[220px] bg-accent overflow-hidden relative cursor-pointer"
-              onClick={() => window.open(Video3Full, "_blank")}
+              onClick={() => handleOpenFullscreenVideo(Video3Full)}
             >
               <video
                 className="object-cover h-full w-full hover:scale-110 transition-all duration-500"
@@ -155,7 +185,7 @@ const Portfolio = () => {
             </div>
             <div
               className="max-w-[250px] lg:max-w-[320px] h-[187px] lg:h-[220px] bg-accent overflow-hidden relative cursor-pointer"
-              onClick={() => window.open(Video1Full, "_blank")}
+              onClick={() => handleOpenFullscreenVideo(Video1Full)}
             >
               <video
                 className="object-cover h-full w-full hover:scale-110 transition-all duration-500"
@@ -170,7 +200,7 @@ const Portfolio = () => {
             </div>
             <div
               className="max-w-[250px] lg:max-w-[320px] h-[187px] lg:h-[220px] bg-accent overflow-hidden relative cursor-pointer"
-              onClick={() => window.open(Video2Full, "_blank")}
+              onClick={() => handleOpenFullscreenVideo(Video2Full)}
             >
               <video
                 className="object-cover h-full w-full hover:scale-110 transition-all duration-500"
@@ -185,7 +215,7 @@ const Portfolio = () => {
             </div>
             <div
               className="max-w-[250px] lg:max-w-[320px] h-[187px] lg:h-[220px] bg-accent overflow-hidden relative cursor-pointer"
-              onClick={() => window.open(Video4Full, "_blank")}
+              onClick={() => handleOpenFullscreenVideo(Video4Full)}
             >
               <video
                 className="object-cover h-full w-full hover:scale-110 transition-all duration-500"
@@ -202,22 +232,41 @@ const Portfolio = () => {
         </div>
 
         {showCarousel && (
-  <div
-    className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
-    onClick={handleCloseCarousel} // This should close the modal
-  >
-    <div
-      className="relative bg-white p-8 rounded-lg max-w-3xl mx-auto overflow-hidden"
-      style={{ maxHeight: "90vh", width: "80%", height: "80%" }}
-      onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
-    >
-      <div className="overflow-y-auto h-full relative">
-        <PortfolioCarousel />
-      </div>
-    </div>
-  </div>
-)}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+            onClick={handleCloseCarousel}
+          >
+            <div
+              className="relative bg-white p-8 rounded-lg max-w-3xl mx-auto overflow-hidden"
+              style={{ maxHeight: "90vh", width: "80%", height: "80%" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="overflow-y-auto h-full relative">
+                <PortfolioCarousel />
+              </div>
+            </div>
+          </div>
+        )}
 
+        {/* Fullscreen Video Modal */}
+        {showFullscreenVideo && currentVideo && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+            onClick={handleCloseFullscreenVideo} // Clicking outside the video closes the modal
+          >
+            <div
+              className="relative bg-transparent"
+              onClick={(e) => e.stopPropagation()} // Prevent click propagation to background
+            >
+              <video
+                className="w-full h-full max-h-full max-w-full"
+                src={currentVideo}
+                controls
+                autoPlay
+              />
+            </div>
+          </div>
+        )}
       </div>
     </motion.section>
   );
