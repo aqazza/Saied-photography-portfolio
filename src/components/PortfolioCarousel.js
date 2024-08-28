@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import saied5 from "../img/about/saied5.png"
+import React, { useState, useEffect, useCallback } from "react";
+import saied5 from "../img/about/saied5.png";
 
 const PortfolioCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -22,17 +22,17 @@ const PortfolioCarousel = () => {
     }
   ];
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setCurrentSlide((prevSlide) => 
       prevSlide === 0 ? slides.length - 1 : prevSlide - 1
     );
-  };
+  }, [slides.length]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setCurrentSlide((prevSlide) => 
       prevSlide === slides.length - 1 ? 0 : prevSlide + 1
     );
-  };
+  }, [slides.length]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -48,14 +48,14 @@ const PortfolioCarousel = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [handlePrev, handleNext]); // Updated dependency array
 
   return (
     <div className="relative flex items-center justify-center w-full h-full">
       <button 
-        className="absolute text-3xl z-50 text-white"  // Added text-white to make the arrow white
+        className="absolute text-3xl z-50 text-white"
         onClick={handlePrev}
-        style={{ left: '-30px' }} // Pushed farther to the left
+        style={{ left: '-30px' }}
       >
         &larr;
       </button>
@@ -65,13 +65,13 @@ const PortfolioCarousel = () => {
           alt={slides[currentSlide].title} 
           className="w-full h-auto max-h-[400px] rounded-lg"
         />
-        <h2 className="text-xl font-bold mt-4 text-white">{slides[currentSlide].title}</h2> {/* Optional: make the title white */}
-        <p className="text-sm text-white">{slides[currentSlide].description}</p> {/* Optional: make the description white */}
+        <h2 className="text-xl font-bold mt-4 text-white">{slides[currentSlide].title}</h2>
+        <p className="text-sm text-white">{slides[currentSlide].description}</p>
       </div>
       <button 
-        className="absolute text-3xl z-50 text-white"  // Added text-white to make the arrow white
+        className="absolute text-3xl z-50 text-white"
         onClick={handleNext}
-        style={{ right: '-30px' }} // Pushed farther to the right
+        style={{ right: '-30px' }}
       >
         &rarr;
       </button>
